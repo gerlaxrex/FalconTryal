@@ -4,3 +4,4 @@ scipy
 torch
 transformers
 accelerate
+fastapi

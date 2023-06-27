@@ -1,7 +1,5 @@
-from model.falcon_pipeline import get_model_pipeline
-from transformers import Pipeline, AutoTokenizer, PreTrainedTokenizer
-
-MODEL_NAME = "tiiuae/falcon-7b"
+from app.services.falcon_model import get_model_pipeline
+from transformers import Pipeline, PreTrainedTokenizer
 
 
 def perform_query(query: str,

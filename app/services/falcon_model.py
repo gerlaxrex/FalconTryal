@@ -1,18 +1,19 @@
 import functools
 from typing import Tuple
 
+import cachetools
 from transformers import AutoTokenizer, AutoModelForCausalLM, Pipeline, PreTrainedTokenizer
 import transformers
 import torch
 
 
-@functools.lru_cache(maxsize=1)
-def get_tokenizer(model_name: str):
+@cachetools.cached(cache=cachetools.LRUCache(maxsize=1))
+def get_tokenizer(model_name: str) -> PreTrainedTokenizer:
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     return tokenizer
 
 
-@functools.lru_cache(maxsize=1)
+@cachetools.cached(cache=cachetools.LRUCache(maxsize=1))
 def get_model_pipeline(model_name: str,
                        tokenizer_model: PreTrainedTokenizer = None) -> Tuple[Pipeline, PreTrainedTokenizer]:
     tokenizer = tokenizer_model or get_tokenizer(model_name)
